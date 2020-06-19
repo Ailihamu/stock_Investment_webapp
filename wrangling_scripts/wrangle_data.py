@@ -8,7 +8,6 @@ import matplotlib.pyplot as plt
 import plotly.graph_objs as go
 import yfinance as yf
 from pandas_datareader import data as pdr
-%matplotlib inline
 
 def return_figures():
     """Creates four plotly visualizations
@@ -134,8 +133,7 @@ def return_figures():
                                                       inplace=True)
 
     #calculate the two years investment return on the current date
-    merged_portfolio_sp500_two_years_start_end['Return'] = merged_portfolio_sp500_two_years_start_end['End'] /
-    merged_portfolio_sp500_two_years_start_end['Start'] - 1
+    merged_portfolio_sp500_two_years_start_end['Return'] = merged_portfolio_sp500_two_years_start_end['End'] / merged_portfolio_sp500_two_years_start_end['Start'] - 1
 
     #average return of the selected portfolio
     portfolio_return_two_years = merged_portfolio_sp500_two_years_start_end.iloc[0:4]['Return'].mean()
@@ -171,8 +169,7 @@ def return_figures():
     merged_portfolio_sp500_one_years_start_end.rename(columns={'2019':'Start', '2020':'End'}, index = {'Date':'Portfolio'}, inplace=True)
 
     #calculate the two years investment return on the current date
-    merged_portfolio_sp500_one_years_start_end['Return'] = merged_portfolio_sp500_one_years_start_end['End'] /
-    merged_portfolio_sp500_one_years_start_end['Start'] - 1
+    merged_portfolio_sp500_one_years_start_end['Return'] = merged_portfolio_sp500_one_years_start_end['End'] / merged_portfolio_sp500_one_years_start_end['Start'] - 1
 
     #average return of the selected portfolio
     portfolio_return_one_years = merged_portfolio_sp500_one_years_start_end.iloc[0:4]['Return'].mean()
