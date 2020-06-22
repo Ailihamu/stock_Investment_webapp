@@ -3,11 +3,14 @@ import json, plotly
 from flask import render_template
 from wrangling_scripts.wrangle_data import return_figures
 
-@app.route('/')
-@app.route('/index')
+@app.route('/', methods=['POST', 'GET')
+@app.route('/index', methods=['POST', 'GET')
 def index():
-
-    figures = return_figures()
+                              
+    stocks = (request.form['portfolio'])
+    index = (request.form['toggle'])                        
+    
+    figures = return_figures(index, stock)
 
     # plot ids for the html id tag
     ids = ['figure-{}'.format(i) for i, _ in enumerate(figures)]

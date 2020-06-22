@@ -70,6 +70,30 @@
             
         </div>
         
+        <!-- form -->
+        
+        <form>
+           <div class="form-group">
+               <label>Stocks:</label>
+               <input type="text" data-role="tagsinput" class="form-control" name="portfolio" id="stock">
+           </div>
+           <div class="btn-group" id="filterDay">
+               <label>Index for ROI Comparison:</label>
+               <label class="btn btn-default blue">
+                   <input type="radio" class="toggle" name="toggle" value="SP500" checked>SP500
+               </label>
+               <label class="btn btn-default blue">
+                   <input type="radio" class="toggle" name="toggle" value="NASDAQ">NASDAQ
+               </label>
+               <label class="btn btn-default blue">
+                   <input type="radio" class="toggle" name="toggle" value="Dow Jones">Dow Jones
+               </label>
+               <label class="btn btn-default blue">
+                   <input type="radio" class="toggle" name="toggle" value="ASX 200">ASX 200
+               </label>
+           </div>
+        </form>
+        
         <!--charts-->       
         <div id="charts" class="container mt-3 text-center">
                     
@@ -113,7 +137,12 @@
                 figures[i].data,
                 figures[i].layout || {});
         }
+        
+        $("input[name=portfolio]").val();
+        $('input[name=toggle]:checked').val();
     </script>
+    
+    
     
 </footer>
 
