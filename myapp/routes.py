@@ -1,12 +1,13 @@
 from myapp import app
 import json, plotly
-from flask import render_template
+from flask import render_template, request, Response, jsonify
 from wrangling_scripts.wrangle_data import return_figures
 
-@app.route('/', methods=['POST', 'GET')
-@app.route('/index', methods=['POST', 'GET')
+@app.route('/', methods=['POST', 'GET'])
+@app.route('/index', methods=['POST', 'GET'])
 def index():
-                              
+    
+    request.method == 'POST'
     stocks = (request.form['portfolio'])
     index = (request.form['toggle'])                        
     
