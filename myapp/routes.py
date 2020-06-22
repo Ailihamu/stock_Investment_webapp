@@ -5,13 +5,16 @@ from wrangling_scripts.wrangle_data import return_figures
 
 @app.route('/', methods=['POST', 'GET'])
 @app.route('/index', methods=['POST', 'GET'])
+
 def index():
-    
-    request.method == 'POST'
-    stocks = (request.form['portfolio'])
-    index = (request.form['toggle'])                        
-    
-    figures = return_figures(index, stock)
+                              
+    if request.method == 'POST' and request.form:
+        stocks = (request.form['portfolio'])
+        index = (request.form['toggle'])                        
+        figures = return_figures(index, stock)
+    else:
+        figures = return_figures()
+        
 
     # plot ids for the html id tag
     ids = ['figure-{}'.format(i) for i, _ in enumerate(figures)]
@@ -22,3 +25,4 @@ def index():
     return render_template('index.html',
                            ids=ids,
                            figuresJSON=figuresJSON)
+   

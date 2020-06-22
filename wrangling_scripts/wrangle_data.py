@@ -10,10 +10,12 @@ import yfinance as yf
 from pandas_datareader import data as pdr
 
 
-# default list of all countries of interest
+# default list 
 stock_index = {'SP500':'^GSPC', 'NASDAQ':'^IXIC','Dow Jones':'^DJI', 'ASX 200':'^AXJO'}
+default_index = 'SP500'
+default_portfolio = ["AAPL", "JNJ", "MCD", "MTCH", "NFLX"]
     
-def return_figures(stocks, index):
+def return_figures(stocks=default_portfolio, index=default_index):
     """Creates four plotly visualizations
 
     Args:
@@ -51,16 +53,19 @@ def return_figures(stocks, index):
         
         return stock_history_adjclose            
 
-    # when the index variable is empty, use the default dictionary [('SP500', '^GSPC')]    
-    
+    # when the index variable is empty, use the default index and portfolio   
+    if not bool(index):
+        
+        index = default_index
+        stocks = default_portfolio 
     # prepare filter data for YahooFinance API
     # the API uses codes start by ^
-    index_filter = stock_index(index)
+    index_filter = stock_index[index]
     index_adjclose_three_years = get_stock_history(index_filter, 3) #index adjusted closing price in recent 3 years
     index_adjclose_three_years = index_adjclose_three_years.rename(columns={'Adj Close':index})
     
     #choosing 5 stocks into the portfolio
-    portfolio_stocks = [stocks]
+    portfolio_stocks = stocks
 
     #down load the historical data for the tocks in the portfolio for recent 3 years
     portfolio_adjclose_three_years = get_stock_history(portfolio_stocks, 3)
@@ -123,7 +128,7 @@ def return_figures(stocks, index):
                     )
     
     #prepare data for the 2 years period of investment
-    index_adjclose_two_years = get_stock_history(index, 2) #index adjusted closing price in recent 2 years
+    index_adjclose_two_years = get_stock_history(index_filter, 2) #index adjusted closing price in recent 2 years
     index_adjclose_tow_years = index_adjclose_two_years.rename(columns={'Adj Close':index})
     portfolio_adjclose_two_years = get_stock_history(portfolio_stocks, 2)
     portfolio_adjclose_two_years = portfolio_adjclose_two_years['Adj Close']
@@ -160,8 +165,8 @@ def return_figures(stocks, index):
                     )
     
     #prepare data for the 1 years period of investment
-    index_adjclose_one_years = get_stock_history(index, 1) #sp500 adjusted closing price in recent 1 years
-    index_adjclose_one_years = sp500_adjclose_one_years.rename(columns={'Adj Close':index})
+    index_adjclose_one_years = get_stock_history(index_filter, 1) #sp500 adjusted closing price in recent 1 years
+    index_adjclose_one_years = index_adjclose_one_years.rename(columns={'Adj Close':index})
     portfolio_adjclose_one_years = get_stock_history(portfolio_stocks, 1)
     portfolio_adjclose_one_years = portfolio_adjclose_one_years['Adj Close']
     merged_portfolio_index_one_years = pd.merge(portfolio_adjclose_one_years, index_adjclose_one_years, left_index=True,
