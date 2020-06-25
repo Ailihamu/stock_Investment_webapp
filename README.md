@@ -16,6 +16,7 @@ Python 3* were used in creating this project.
 Apart from Anaconda distribution of Python, needed libs and installations are:
 
 Flask: pip install flask
+
 Yahoo finance API: pip install yfinance
 
 
