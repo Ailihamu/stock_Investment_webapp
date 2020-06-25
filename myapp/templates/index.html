@@ -30,7 +30,10 @@
   <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
     <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
       <li class="nav-item">
-        <a class="nav-link" href="http://localhost:8888/edit/AFM/stock_Investment_webapp/myapp/templates/index.html#">SP500</a>
+        <a class="nav-link" href="/">HOME</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="https://finance.yahoo.com/quote/^GSPC?p=^GSPC&.tsrc=fin-srch">SP500</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="https://finance.yahoo.com/quote/^IXIC?p=^IXIC&.tsrc=fin-srch">NASDAQ</a>
@@ -71,11 +74,10 @@
         </div>
         
         <!-- form -->
-        
-        <form>
+        <form action="/" method=post>
            <div class="form-group">
-               <label>Stocks:</label>
-               <input type="text" data-role="tagsinput" class="form-control" name="portfolio" id="stock">
+               <label>Portfolio:</label>
+               <input type="text" data-role="tagsinput" placeholder="Select Stocks" class="form-control" name="portfolio" id="stock">
            </div>
            <div class="btn-group" id="filterDay">
                <label>Index for ROI Comparison:</label>
@@ -92,40 +94,51 @@
                    <input type="radio" class="toggle" name="toggle" value="ASX 200">ASX 200
                </label>
            </div>
-        </form>
-        
-        <!--charts-->       
-        <div id="charts" class="container mt-3 text-center">
-                    
-            <!--top one charts-->       
-            <div class="row">
-                <div id="{{ids[0]}}"></div>
-            </div>
+                
+              <button id="country_selector" type="submit" class="btn btn-primary my-1">Submit</button>
+      </form>
 
-            <!--bottom three charts-->        
-            <div class="row mb-6 mt-6">
-                <div id="{{ids[1]}}"></div>
-            </div>
-            
-            <div class="row mb-6 mt-6">
-                <div id="{{ids[2]}}"></div>
-            <div>
-            
-            <div class="row mb-6 mt-6">
-                <div id="{{ids[3]}}"></div>
-            </div>
-        
-        </div>
-    <div>
+		<!--charts-->		
+		<div id="chart1" class="container mt-3 text-center">
+					
+			<!--top two charts-->		
+			<div class="row">
+				<div class="col-6">
+					<div id="{{ids[0]}}"></div>
+				</div>
+				<div class="col-6">
+					<div id="{{ids[1]}}"></div>
+				</div>
+			</div>
+
+			<!--bottom two charts-->		
+			<div class="row mb-6">
+				<div class="col-6">	
+					<div id="chart3">
+						<div id="{{ids[2]}}"></div>
+					</div>
+			    </div>
+				<div class="col-6">
+					<div id="chart4">
+						<div id="{{ids[3]}}"></div>
+					</div>
+				<div>
+			</div>
+		
+		</div>
+	<div>
 </div>
+
+</body>      
 
 <!--footer section-->               
 <div id="footer" class="container"></div>
 
-</body>
 
 
 <footer>
+          
+
 
     <script type="text/javascript">
         // plots the figure with id
@@ -140,6 +153,8 @@
         
         $("input[name=portfolio]").val();
         $('input[name=toggle]:checked').val();
+        
+                                           
     </script>
     
     
