@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 import plotly.graph_objs as go
 import yfinance as yf
 from pandas_datareader import data as pdr
+import requests
 
 
 # default list 
@@ -17,7 +18,6 @@ default_portfolio = ["AAPL", "JNJ", "MCD", "MTCH", "NFLX"]
     
 def return_figures(stocks=default_portfolio, index=default_index):
     """Creates four plotly visualizations
-
     Args:
         None
 
@@ -40,13 +40,13 @@ def return_figures(stocks=default_portfolio, index=default_index):
     
         #setup the holding period as 1, 2, 3 years
         today = date.today()
-        time_of_buying_tree_years = today.replace(today.year - invest_period)
+        time_of_buying_three_years = today.replace(today.year - invest_period)
         time_of_buying_two_years = today.replace(today.year - invest_period)
         time_of_buying_one_years = today.replace(today.year - invest_period)
 
         #down load the stock historical data for recent 3 years
         yf.pdr_override()
-        stock_history = pdr.get_data_yahoo(tiker, time_of_buying_tree_years, today)
+        stock_history = pdr.get_data_yahoo(tiker, time_of_buying_three_years, today)
     
         # Create a dataframe with only the Adj Close column
         stock_history_adjclose = stock_history[['Adj Close']]
@@ -55,7 +55,6 @@ def return_figures(stocks=default_portfolio, index=default_index):
 
     # when the index variable is empty, use the default index and portfolio   
     if not bool(index):
-        
         index = default_index
         stocks = default_portfolio 
     # prepare filter data for YahooFinance API
@@ -64,7 +63,7 @@ def return_figures(stocks=default_portfolio, index=default_index):
     index_adjclose_three_years = get_stock_history(index_filter, 3) #index adjusted closing price in recent 3 years
     index_adjclose_three_years = index_adjclose_three_years.rename(columns={'Adj Close':index})
     
-    #choosing 5 stocks into the portfolio
+    #choosing stocks into the portfolio
     portfolio_stocks = stocks
 
     #down load the historical data for the tocks in the portfolio for recent 3 years
