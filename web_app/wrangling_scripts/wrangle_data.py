@@ -4,7 +4,6 @@ import pandas as pd
 import numpy as np
 import datetime
 from datetime import date
-import matplotlib.pyplot as plt
 import plotly.graph_objs as go
 import yfinance as yf
 from pandas_datareader import data as pdr
